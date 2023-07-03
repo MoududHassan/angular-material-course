@@ -1,7 +1,9 @@
 import {Component} from '@angular/core';
 import {UntypedFormBuilder, Validators} from '@angular/forms';
-import { MatCalendarCellClassFunction } from '@angular/material/datepicker';
+import { MatCalendarCellClassFunction, MatCalendarCellCssClasses } from '@angular/material/datepicker';
 
+
+const SIMPLE_TEXT = "This is simple text for testing purposes.This is simple text for testing purposes.This is simple text for testing purposes.This is simple text for testing purposes.This is simple text for testing purposes.This is simple text for testing purposes.This is simple text for testing purposes.";
 
 @Component({
   selector: "create-course-step-1",
@@ -20,20 +22,29 @@ export class CreateCourseStep1Component {
     category: ['BEGINNER', Validators.required],
     courseType: ['premium', Validators.required],
     downloadsAllowed: [false, Validators.requiredTrue],
-    longDescription: ['', [Validators.required, Validators.minLength(3)]]
+    longDescription: [SIMPLE_TEXT, [Validators.required, Validators.minLength(3)]]
   });
 
   constructor(private fb: UntypedFormBuilder) {
 
   }
 
-  dateClass: MatCalendarCellClassFunction<Date> = (cellDate, view) =>{
+  dateClass: MatCalendarCellClassFunction<Date> = (cellDate, view) => {
+
     const date = cellDate.getDate();
-    if(view == 'month'){
-      return (date == 1) ? 'highlight-date':"";
+
+    if (view == 'month') {
+        return (date === 1) ? ['highlight-date'] : [""];
     }
-    return "";
+
+    return [""];
   }
+
+  // dateClass = (d: Date) => {
+  //   const date = d.getDay();
+  //   // Highlight saturday and sunday.
+  //   return (date === 0 || date === 6) ? 'highlight-date' : undefined;
+  // }
 
   get courseTitle() {
     return this.form.controls['title'];
