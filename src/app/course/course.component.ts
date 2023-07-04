@@ -91,4 +91,16 @@ export class CourseComponent implements OnInit, AfterViewInit {
       console.log(this.selection.selected);
     }
 
+    isAllSelected(){
+      return this.selection.selected?.length == this.lessons?.length;
+    }
+
+    toggleAll(){
+      if(this.isAllSelected()){
+        this.selection.clear();
+      }else{
+        this.selection.select(...this.lessons);
+      }
+    }
+
 }
