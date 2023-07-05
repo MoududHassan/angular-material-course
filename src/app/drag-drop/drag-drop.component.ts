@@ -90,4 +90,21 @@ export class DragDropComponent {
     }
   ];
 
+  done = [];
+
+  drop(event:CdkDragDrop<Lesson[]>){
+    console.log("Current index: ",event.currentIndex);
+    console.log("Previous index: ",event.previousIndex);
+    moveItemInArray(this.lessons, event.previousIndex, event.currentIndex);
+  }
+
+  dropMultiList(event:CdkDragDrop<Lesson[]>){
+    if(event.previousContainer == event.container){
+      moveItemInArray(this.lessons, event.previousIndex, event.currentIndex);
+    }else{
+      transferArrayItem(event.previousContainer.data, event.container.data, event.previousIndex, event.currentIndex);
+    }
+  }
+
+
 }
